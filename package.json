@@ -4,15 +4,30 @@
   "description": "",
   "main": "db.js",
   "dependencies": {
+    "express": "^4.17.1",
     "pg": "^7.12.1",
     "sequelize": "^5.19.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-react": "^7.0.0",
+    "axios": "^0.19.0",
+    "babel-loader": "^8.0.6",
     "chai": "^4.2.0",
-    "mocha": "^6.2.1"
+    "mocha": "^6.2.1",
+    "react": "^16.10.1",
+    "react-dom": "^16.10.1",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
+    "webpack": "^4.41.0",
+    "webpack-cli": "^3.3.9"
   },
   "scripts": {
-    "test:dev": "mocha spec.js --watch"
+    "test:dev": "mocha spec.js --watch",
+    "webpack": "webpack --watch --mode=development",
+    "start:dev": "nodemon server.js --ignore dist/ --ignore src/ & npm run webpack"
   },
   "keywords": [],
   "author": "",
