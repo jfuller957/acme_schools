@@ -1,5 +1,5 @@
 const app = require('express').Router();
-const db = require('./db');
+const db = require('../assets/db');
 
 
 app.get('/students', async(req, res, next)=> {

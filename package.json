@@ -8,6 +8,9 @@
     "pg": "^7.12.1",
     "sequelize": "^5.19.2"
   },
+  "babel": {
+    "presets": ["@babel/react"]
+  },
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
@@ -27,7 +30,7 @@
   "scripts": {
     "test:dev": "mocha spec.js --watch",
     "webpack": "webpack --watch --mode=development",
-    "start:dev": "nodemon server.js --ignore dist/ --ignore src/ & npm run webpack"
+    "start:dev": "nodemon server.js --ignore assets/ --ignore client/ & npm run webpack"
   },
   "keywords": [],
   "author": "",
