@@ -10,14 +10,17 @@ const SET_SCHOOLS = 'SET_SCHOOLS';
 
 const reducer = combineReducers({
     students: ( state = [], action)=> {
+        let newState = [...state]; 
         if(action.type === ADD_STUDENT){
-            state = [...state, action.student];
+            
+            return [...state, action.student];
         }
         else if(action.type === SET_STUDENTS){
-            state = action.students;
+            return action.students;
         }
-        return state;
+        return newState;
     },
+
     schools: ( state = [], action)=> {
         if(action.type === ADD_SCHOOL){
             state = [...state, action.school];
@@ -31,22 +34,23 @@ const reducer = combineReducers({
 
 const store = createStore(reducer, applyMiddleware(thunk));
 
-const fetchStudents = async()=> {
-    store.dispatch({ type: SET_STUDENTS, students: (await axios.get('/api/students')).data});
-};
+// Thunks
 
 const addStudent = (student) => {
     return { type: ADD_STUDENT, student };
 };
 
-const addNewStudent = ()=> {
+const addNewStudent = (newStudent)=> {
+    console.log(newStudent + "added!");
     return async(dispatch)=> {
-        const student = (await axios.post('/api/students')).data;
+        const student = (await axios.post('/api/students', newStudent)).data;
         dispatch(addStudent(student));
     }
 };
 
-
+const fetchStudents = async()=> {
+    store.dispatch({ type: SET_STUDENTS, students: (await axios.get('/api/students')).data});
+};
 
 const fetchSchools = async()=> {
     store.dispatch({ type: SET_SCHOOLS, schools: (await axios.get('/api/schools')).data});
@@ -56,4 +60,4 @@ const fetchSchools = async()=> {
 
 export default store;
 
-export { fetchStudents, fetchSchools, addNewStudent };
+export { fetchStudents, fetchSchools, addNewStudent, addStudent };

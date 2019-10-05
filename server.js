@@ -7,7 +7,6 @@ const fs = require('fs');
 const port = 3000;
 const Sequelize = require('sequelize');
 
-const conn = new Sequelize('postgres://localhost/students_and_schools_db');
 
 db.syncAndSeed()
     .then(()=> app.listen(port, ()=> console.log(`Listening on port ${port}`)));
@@ -27,7 +26,7 @@ app.use(express.json());
 
 app.post('/api/students', async(req, res, next)=> {
     try {
-        res.send( await db.addStudent(req.body));
+        res.send( await db.models.Student.create(req.body));
     }
     catch(ex){
         next(ex);

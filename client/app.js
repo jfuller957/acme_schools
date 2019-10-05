@@ -14,10 +14,10 @@ import Home from './Home';
 import store, { fetchStudents, fetchSchools, addNewStudent } from './store';
 
 class App extends React.Component{
-    componentDidMount(){
+    async componentDidMount(){
         fetchStudents();
         fetchSchools();
-        addNewStudent();
+        // addNewStudent();
     }
     render(){
         return(

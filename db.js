@@ -19,13 +19,7 @@ const Student = conn.define('student', {
     },
     email: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-        validate: {
-            isEmail: {
-                msg: "Must be a valid email address...",
-            }
-        }
+        allowNull: false
     }
 });
 
@@ -38,8 +32,7 @@ const School = conn.define('school', {
     },
     name: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
     }
 });
 
@@ -62,12 +55,12 @@ const syncAndSeed = async()=> {
     const students = await Student.findAll();
 
     try {
-        const [ucSchool, csuSchool, privateSchool, juniorSchool] = await
+        const [ucsdSchool, csusmSchool, calpolySchool, palomarSchool] = await
             Promise.all([
-                School.create({ name: 'uc'}),
-                School.create({ name: 'csu'}),
-                School.create({ name: 'private'}),
-                School.create({ name: 'junior'})
+                School.create({ name: 'UCSD'}),
+                School.create({ name: 'CSUSM'}),
+                School.create({ name: 'Cal-Poly'}),
+                School.create({ name: 'Palomar'})
             ]);
 
         const schools = await School.findAll();
