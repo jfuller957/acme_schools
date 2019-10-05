@@ -1,13 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Students = ({ students }) => {
-    return (
-        <ul>
-            {
-                students.map( student => <li key={ student.id }>{student.name}</li>)
-            }
-        </ul>
-    );
-};
+const _Students = ({ students })=> <div>
+    Students -  there are { students.length } students.
+</div>
+;
+
+const mapStateToProps = ({ students })=> ({ students });
+
+const Students = connect(mapStateToProps)(_Students);
 
 export default Students;

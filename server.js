@@ -1,11 +1,39 @@
 const express = require('express');
 const app = express();
-const db = require('./assets/db');
+const db = require('./db');
 const path = require('path');
 const babel = require('@babel/core');
 const fs = require('fs');
+const port = 3000;
+const Sequelize = require('sequelize');
 
-const port = process.env.PORT || 3000;
+const conn = new Sequelize('postgres://localhost/students_and_schools_db');
+
+db.syncAndSeed()
+    .then(()=> app.listen(port, ()=> console.log(`Listening on port ${port}`)));
+
+app.get('/api/students', async(req, res, next)=> {
+    try {
+        res.send( await db.models.Student.findAll());
+    }
+    catch(ex){
+        next(ex);
+    }
+});
+
+app.get('/api/schools', async(req, res, next)=> {
+    try {
+        res.send( await db.models.School.findAll());
+    }
+    catch(ex){
+        next(ex);
+    }
+});
+    
+
+app.use('/assets', express.static(path.join(__dirname, 'assets')));
+
+app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html')));
 
 babel.transformFile('./client/app.js', {presets: ['@babel/react']}, (err, result)=> {
     if(err){
@@ -17,16 +45,3 @@ babel.transformFile('./client/app.js', {presets: ['@babel/react']}, (err, result
         });
     }
 });
-
-
-
-
-app.use('/assets', express.static(path.join(__dirname, 'assets')));
-
-
-
-app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html')));
-
-
-db.syncAndSeed()
-    .then(app.listen(port, ()=> console.log(`Listening on port ${port}`)));
