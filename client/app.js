@@ -11,12 +11,13 @@ import Nav from './Nav';
 import Schools from './Schools';
 import Home from './Home';
 
-import store, { fetchStudents, fetchSchools } from './store';
+import store, { fetchStudents, fetchSchools, addNewStudent } from './store';
 
 class App extends React.Component{
     componentDidMount(){
         fetchStudents();
         fetchSchools();
+        addNewStudent();
     }
     render(){
         return(

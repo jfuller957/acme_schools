@@ -29,16 +29,31 @@ const reducer = combineReducers({
     }
 });
 
+const store = createStore(reducer, applyMiddleware(thunk));
+
 const fetchStudents = async()=> {
     store.dispatch({ type: SET_STUDENTS, students: (await axios.get('/api/students')).data});
-}
+};
+
+const addStudent = (student) => {
+    return { type: ADD_STUDENT, student };
+};
+
+const addNewStudent = ()=> {
+    return async(dispatch)=> {
+        const student = (await axios.post('/api/students')).data;
+        dispatch(addStudent(student));
+    }
+};
+
+
 
 const fetchSchools = async()=> {
     store.dispatch({ type: SET_SCHOOLS, schools: (await axios.get('/api/schools')).data});
-}
+};
 
-const store = createStore(reducer, applyMiddleware(thunk));
+
 
 export default store;
 
-export { fetchStudents, fetchSchools };
+export { fetchStudents, fetchSchools, addNewStudent };

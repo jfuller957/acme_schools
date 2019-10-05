@@ -2,7 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const _Schools = ({ schools })=> <div>
-    Schools -  there are { schools.length } schools.
+    The following school types are available to attend in California: 
+
+    <ul>
+        {
+            schools.map( school => <li key={ school.id }>{ school.name }</li>)   
+        }
+    </ul>
 </div>
 ;
 

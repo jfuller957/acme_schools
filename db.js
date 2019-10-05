@@ -9,10 +9,23 @@ const Student = conn.define('student', {
         defaultValue: Sequelize.UUIDV4,
         unique: true
     },
-    name: {
+    firstName: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    lastName: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
+        validate: {
+            isEmail: {
+                msg: "Must be a valid email address...",
+            }
+        }
     }
 });
 
@@ -35,10 +48,10 @@ const syncAndSeed = async()=> {
     try {
         const [moeStudent, larryStudent, curlyStudent, shepStudent] = await
         Promise.all([
-            Student.create({ name: 'moe'}),
-            Student.create({ name: 'larry'}),
-            Student.create({ name: 'curly'}),
-            Student.create({ name: 'shep'})
+            Student.create({ firstName: 'moe', lastName: 'alpha', email: 'moe.alpha@grumble.com'}),
+            Student.create({ firstName: 'larry', lastName: 'bravo', email: 'larry.bravo@bumble.com'}),
+            Student.create({ firstName: 'curly', lastName: 'charlie', email: 'curly.charlie@tumble.com'}),
+            Student.create({ firstName: 'shep', lastName: 'delta', email: 'shep.delta@mumble.com'})
         ]);
         console.log('success');
     }

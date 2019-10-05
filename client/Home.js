@@ -1,17 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const _Home = ({ students })=> <div>
-    Home -  there are { students.length } students.
+const _Home = ({ students, schools })=> <div>
+    Home -  there are { students.length } students and { schools.length } schools.
+
+
 </div>
 ;
 
-const mapStateToProps = ({ students })=> ({ students });
-// const mapDispatchToProps = (dispatch)=> {
-//     return {
+const mapStateToProps = ({ students, schools })=> ({ students, schools });
 
-//     }
-// }
 
 const Home = connect(mapStateToProps)(_Home);
 

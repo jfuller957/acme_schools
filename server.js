@@ -21,6 +21,19 @@ app.get('/api/students', async(req, res, next)=> {
     }
 });
 
+
+// parse incoming requests to add
+app.use(express.json());
+
+app.post('/api/students', async(req, res, next)=> {
+    try {
+        res.send( await db.addStudent(req.body));
+    }
+    catch(ex){
+        next(ex);
+    }
+});
+
 app.get('/api/schools', async(req, res, next)=> {
     try {
         res.send( await db.models.School.findAll());
