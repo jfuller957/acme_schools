@@ -5,8 +5,6 @@ const path = require('path');
 const babel = require('@babel/core');
 const fs = require('fs');
 const port = 3001;
-const Sequelize = require('sequelize');
-
 
 db.syncAndSeed()
     .then(()=> app.listen(port, ()=> console.log(`Listening on port ${port}`)));

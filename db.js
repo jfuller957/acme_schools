@@ -20,6 +20,10 @@ const Student = conn.define('student', {
     email: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    gpa: {
+        type: Sequelize.DECIMAL,
+        allowNull: true
     }
 });
 
@@ -41,10 +45,10 @@ const syncAndSeed = async()=> {
     try {
         const [moeStudent, larryStudent, curlyStudent, shepStudent] = await
         Promise.all([
-            Student.create({ firstName: 'Moe', lastName: 'Alpha', email: 'moe.alpha@grumble.com'}),
-            Student.create({ firstName: 'Larry', lastName: 'Bravo', email: 'larry.bravo@bumble.com'}),
-            Student.create({ firstName: 'Curly', lastName: 'Charlie', email: 'curly.charlie@tumble.com'}),
-            Student.create({ firstName: 'Shep', lastName: 'Delta', email: 'shep.delta@mumble.com'})
+            Student.create({ firstName: 'Moe', lastName: 'Alpha', email: 'moe.alpha@grumble.com', gpa: '4.0'}),
+            Student.create({ firstName: 'Larry', lastName: 'Bravo', email: 'larry.bravo@bumble.com', gpa: '2.0'}),
+            Student.create({ firstName: 'Curly', lastName: 'Charlie', email: 'curly.charlie@tumble.com', gpa: '2.0'}),
+            Student.create({ firstName: 'Shep', lastName: 'Delta', email: 'shep.delta@mumble.com', gpa: '3.0'})
         ]);
         console.log('success');
     }

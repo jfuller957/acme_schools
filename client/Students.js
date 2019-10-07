@@ -2,13 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addNewStudent } from './store';
 
+
 class _Students extends React.Component{
     constructor(){
         super();
         this.state = {
             firstName: '',
             lastName: '',
-            email: ''
+            email: '',
+            gpa: ''
         }
     }
     render(){
@@ -24,11 +26,13 @@ class _Students extends React.Component{
                     {(ev) => this.setState({ lastName: ev.target.value })} />
                 <input name="email" value={ students.email } onChange=
                     {(ev) => this.setState({ email: ev.target.value })} />
+                <input name="gpa" value={ students.gpa } onChange=
+                    {(ev) => this.setState({ gpa: ev.target.value })} />
                 <button onClick={ ()=> this.props.addStudent(this.state) }>Add Student</button>
             </form>
             <ul>
                 {
-                    students.map( student => <li key={ student.id }>Name: { student.lastName }, { student.firstName } - Email: { student.email }</li>)   
+                    students.map( student => <li key={ student.id }>Name: { student.lastName }, { student.firstName } - Email: { student.email } - GPA: { student.gpa }</li>)   
                 }
             </ul>
 
