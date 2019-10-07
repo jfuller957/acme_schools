@@ -11,8 +11,7 @@ const SET_SCHOOLS = 'SET_SCHOOLS';
 const reducer = combineReducers({
     students: ( state = [], action)=> {
         let newState = [...state]; 
-        if(action.type === ADD_STUDENT){
-            
+        if(action.type === ADD_STUDENT){          
             return [...state, action.student];
         }
         else if(action.type === SET_STUDENTS){
@@ -23,10 +22,10 @@ const reducer = combineReducers({
 
     schools: ( state = [], action)=> {
         if(action.type === ADD_SCHOOL){
-            state = [...state, action.school];
+            return [...state, action.school];
         }
         else if(action.type === SET_SCHOOLS){
-            state = action.schools;
+            return action.schools;
         }
         return state;
     }
@@ -41,12 +40,22 @@ const addStudent = (student) => {
 };
 
 const addNewStudent = (newStudent)=> {
-    console.log(newStudent + "added!");
     return async(dispatch)=> {
         const student = (await axios.post('/api/students', newStudent)).data;
         dispatch(addStudent(student));
     }
 };
+
+const addSchool = (school) => {
+    return { type: ADD_SCHOOL, school };
+};
+
+const addNewSchool = (newSchool)=> {
+    return async(dispatch)=> {
+        const school = (await axios.post('/api/schools', newSchool)).data;
+        dispatch(addSchool(school));
+    }
+}
 
 const fetchStudents = async()=> {
     store.dispatch({ type: SET_STUDENTS, students: (await axios.get('/api/students')).data});
@@ -60,4 +69,4 @@ const fetchSchools = async()=> {
 
 export default store;
 
-export { fetchStudents, fetchSchools, addNewStudent, addStudent };
+export { fetchStudents, fetchSchools, addNewStudent, addNewSchool };

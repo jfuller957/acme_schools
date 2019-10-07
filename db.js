@@ -41,10 +41,10 @@ const syncAndSeed = async()=> {
     try {
         const [moeStudent, larryStudent, curlyStudent, shepStudent] = await
         Promise.all([
-            Student.create({ firstName: 'moe', lastName: 'alpha', email: 'moe.alpha@grumble.com'}),
-            Student.create({ firstName: 'larry', lastName: 'bravo', email: 'larry.bravo@bumble.com'}),
-            Student.create({ firstName: 'curly', lastName: 'charlie', email: 'curly.charlie@tumble.com'}),
-            Student.create({ firstName: 'shep', lastName: 'delta', email: 'shep.delta@mumble.com'})
+            Student.create({ firstName: 'Moe', lastName: 'Alpha', email: 'moe.alpha@grumble.com'}),
+            Student.create({ firstName: 'Larry', lastName: 'Bravo', email: 'larry.bravo@bumble.com'}),
+            Student.create({ firstName: 'Curly', lastName: 'Charlie', email: 'curly.charlie@tumble.com'}),
+            Student.create({ firstName: 'Shep', lastName: 'Delta', email: 'shep.delta@mumble.com'})
         ]);
         console.log('success');
     }

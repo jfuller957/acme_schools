@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { addNewStudent } from './store';
 
-// () => addStudent(data)
-
 class _Students extends React.Component{
     constructor(){
         super();
@@ -38,22 +36,6 @@ class _Students extends React.Component{
         )
     }
 }
-
-// const _Students = ({ students, addStudent })=> <div>
-//     Students -  there are { students.length } students.
-
-//     <input value={ students.firstName }/>
-//     <input value={ students.lastName } />
-//     <button onClick={ addStudent }>Add Student</button>
-
-//     <ul>
-//         {
-//             students.map( student => <li key={ student.id }>Name: { student.lastName }, { student.firstName } - Email: { student.email }</li>)   
-//         }
-//     </ul>
-
-// </div>
-// ;
 
 const mapStateToProps = ({ students })=> ({ students });
 

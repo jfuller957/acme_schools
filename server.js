@@ -4,7 +4,7 @@ const db = require('./db');
 const path = require('path');
 const babel = require('@babel/core');
 const fs = require('fs');
-const port = 3000;
+const port = 3001;
 const Sequelize = require('sequelize');
 
 
@@ -36,6 +36,15 @@ app.post('/api/students', async(req, res, next)=> {
 app.get('/api/schools', async(req, res, next)=> {
     try {
         res.send( await db.models.School.findAll());
+    }
+    catch(ex){
+        next(ex);
+    }
+});
+
+app.post('/api/schools', async(req, res, next)=> {
+    try {
+        res.send( await db.models.School.create(req.body));
     }
     catch(ex){
         next(ex);

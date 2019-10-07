@@ -1,19 +1,44 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { addNewSchool } from './store';
 
-const _Schools = ({ schools })=> <div>
-    The following school types are available to attend in California: 
-
-    <ul>
-        {
-            schools.map( school => <li key={ school.id }>{ school.name }</li>)   
+class _Schools extends React.Component{
+    constructor(){
+        super();
+        this.state = {
+            name: ''
         }
-    </ul>
-</div>
-;
+    }
+    render(){
+        const { schools } = this.props || [];
+
+        return (
+            <div>
+                The following school types are available to attend in California: 
+                <form>
+                    <input name='name' value={ schools.name } onChange={(ev) => this.setState({ name: ev.target.value })} />
+                    <button onClick={ ()=> this.props.addSchool(this.state) }>Add School</button>
+                </form>
+                <ul>
+                    {
+                        schools.map( school => <li key={ school.id }>{ school.name }</li>)   
+                    }
+                </ul>
+            </div>
+        ) 
+    }
+};
 
 const mapStateToProps = ({ schools })=> ({ schools });
 
-const Schools = connect(mapStateToProps)(_Schools);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addSchool: (school)=> {
+            dispatch(addNewSchool(school));
+        }
+    };
+};
+
+const Schools = connect(mapStateToProps,mapDispatchToProps)(_Schools);
 
 export default Schools;
