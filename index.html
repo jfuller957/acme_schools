@@ -5,6 +5,121 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script defer src="/assets/app.js"></script>
+    <style>
+        * {
+        box-sizing: border-box;
+        }
+        h1, h2, h3, h4 {
+        margin-top: 0;
+        }
+        input, select, button {
+        height: 1.75rem;
+        font-size: 1rem;
+        }
+        body {
+        font-family: verdana;
+        margin: 0;
+        color: #666;
+        }
+        nav a {
+        text-decoration: none;
+        color: white;
+
+        }
+
+        nav a.selected {
+        font-weight: bold;
+        }
+        nav > a {
+        flex: 1;
+        font-size: .9rem;
+        }
+        nav {
+        flex: 1;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1rem;
+        background-color: dodgerBlue;
+        }
+        #lefty {
+        justify-content: flex-start;
+        flex-grow: 2;
+        font-size: 1.5rem;
+        }
+        #content {
+        margin: 1rem;
+        }
+        .cards {
+        display: flex;
+        flex-wrap: wrap;
+        }
+        .cards > div {
+        border: solid 1px black;
+        border-radius: 1rem;
+        width: calc((100% / 3) - 2rem);
+        margin: 1rem;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        }
+
+        form {
+        padding: 0.35rem;
+        width: 40%;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+        }
+
+        form  > div {
+        display: flex;
+        margin-bottom: 1rem;
+        }
+
+        form > div > label {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        font-weight: bold;
+        }
+
+        form > div > input,select {
+        flex: 1;
+        }
+
+        button.delete{
+        background-color: tomato;
+        color: white;
+        border-color: black;
+        justify-content: center;
+        }
+
+        @media (max-width: 600px){
+
+        nav {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        nav a {
+            margin-top: 1rem;
+        }
+        .cards > div {
+            width: calc(100% - 2rem);
+        }
+        form {
+            width: 100%;
+        }
+        form > div {
+            flex-direction: column;
+        }
+        form > div > label {
+            margin-bottom: 1.5rem;
+        }
+        }
+    </style>
     <title>Junior Phase Final Project - Acme Schools</title>
 </head>
 <body>

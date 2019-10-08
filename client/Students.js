@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addNewStudent, destroyStudent } from './store';
+import { addNewStudent, destroyStudent, fetchSchools } from './store';
 
 
 class _Students extends React.Component{
@@ -15,55 +15,63 @@ class _Students extends React.Component{
         }
     }
     render(){
-        const { students } = this.props || [];
+        console.log(this.props);
+        const { students, schools } = this.props || [];
 
         return (
-        <div>
-            Students -  there are { students.length } students.
-            <form>
-                <input name="firstName" placeholder="First Name" value={ students.firstName } onChange=
-                    {(ev) => this.setState({ firstName: ev.target.value })} />
-                <input name="lastName" placeholder="Last Name" value={ students.lastName } onChange=
-                    {(ev) => this.setState({ lastName: ev.target.value })} />
-                <input name="email" placeholder="Email Address" value={ students.email } onChange=
-                    {(ev) => this.setState({ email: ev.target.value })} />
-                <input name="gpa" placeholder="GPA" value={ students.gpa } onChange=
-                    {(ev) => this.setState({ gpa: ev.target.value })} />
-                <button onClick={ ()=> this.props.addStudent(this.state) }>Add Student</button>
-            </form>
-            <ul>
+        <div id="content">
+            <p>Students -  there are { students.length } students.</p>
+                <form>
+                    <label>First Name</label>
+                    <input name="firstName" placeholder="James" value={ students.firstName } onChange=
+                        {(ev) => this.setState({ firstName: ev.target.value })} />
+                    
+                    <label>Last Name</label>
+                    <input name="lastName" placeholder="Fuller" value={ students.lastName } onChange=
+                        {(ev) => this.setState({ lastName: ev.target.value })} />
+                    
+                    <label>Email Address</label>
+                    <input name="email" placeholder="jfuller957@gmail.com" value={ students.email } onChange=
+                        {(ev) => this.setState({ email: ev.target.value })} />
+
+                    <label>GPA</label>
+                    <input name="gpa" placeholder="4.0" value={ students.gpa } onChange=
+                        {(ev) => this.setState({ gpa: ev.target.value })} />
+                    <button onClick={ ()=> this.props.addStudent(this.state) }>Add Student</button>
+                </form>
+
+            <div className="cards">
                 {
                     students.map( student => 
-                        <li key={ student.id }>
-                            Name:  { student.lastName }, { student.firstName } 
-                            - Email: { student.email } 
-                            - GPA: { student.gpa } 
+                        <div key={ student.id }>
+                            <h4>{ student.firstName } { student.lastName }</h4><br />
+                            
+                            GPA: { student.gpa }<br />
                             - School: { student.school && student.school.name } 
-                        {/* <select>
-                            {
-                                Schools.map( school => <option key={ school.id }>{ school }</option>)
-                            }
-                        </select> */}
-
-                            <button onClick={ ()=> this.props.deleteStudent(this.state) }>Delete Student</button>
-                        </li>)   
+                            <select>
+                                {
+                                    schools.map( school => <option key={ school.id }>{ school.name }</option>)
+                                }
+                            </select>
+                            <button className="delete" onClick={ ()=> this.props.deleteStudent(student.id)}>Delete Student</button>
+                        </div>)   
                 }
-            </ul>
+            </div>
 
         </div>
         )
     }
 }
 
-const mapStateToProps = ({ students })=> ({ students });
+const mapStateToProps = ({ students, schools })=> ({ students, schools });
 
 const mapDispatchToProps = (dispatch) => {
     return {
         addStudent: (student)=> {
             dispatch(addNewStudent(student));
         },
-        deleteStudent: (student)=> {
-            dispatch(destroyStudent(student));
+        deleteStudent: (id)=> {
+            dispatch(destroyStudent(id));
         }
     };
 };

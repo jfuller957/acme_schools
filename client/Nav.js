@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Schools from './Schools';
 
 const _Nav = ({ studentCount, schoolCount, popSchool, topSchool, location})=> {
     return (
         <nav>
-            <Link to='/'>Home</Link>
+            <Link id="lefty" to='/'>Acme Schools</Link>
             <Link to='/students'>Students ({ studentCount })</Link>
             <Link to='/schools'>Schools ({ schoolCount })</Link>
             <Link to='/schools'>Most Popular School ({ popSchool })({ studentCount })</Link>

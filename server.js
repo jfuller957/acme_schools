@@ -39,10 +39,10 @@ app.post('/api/students', async(req, res, next)=> {
 //     }
 // });
 
-app.delete('/api/students/:id', async(req, res, next)=> {
+app.delete('/api/students', async(req, res, next)=> {
     try{
-        const studentId = req.params.id;
-        
+        await db.models.Student.destroy({where: {id: req.body.id}})
+        .then(res.sendStatus(204));
     }
     catch(ex){
         next(ex);

@@ -1,8 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
-
-import { createStore, combineReducers } from 'redux';
 import { Provider, connect } from  'react-redux';
 import { HashRouter, Route, Link } from 'react-router-dom';
 
@@ -25,6 +22,7 @@ class App extends React.Component{
                     <Route component={ Nav } />
                     <Route path='/' component={ Home } exact />
                     <Route path='/students' component={ Students } />
+                    <Route path='/students/:id' component={ Students } />
                     <Route path='/schools' component={ Schools } />
                     <Route path='/schools/:id' component={ Schools } />
                 </HashRouter>
