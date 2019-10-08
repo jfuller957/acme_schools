@@ -10,7 +10,8 @@ class _Students extends React.Component{
             firstName: '',
             lastName: '',
             email: '',
-            gpa: ''
+            gpa: '',
+            school: ''
         }
     }
     render(){
@@ -32,7 +33,7 @@ class _Students extends React.Component{
             </form>
             <ul>
                 {
-                    students.map( student => <li key={ student.id }>Name: { student.lastName }, { student.firstName } - Email: { student.email } - GPA: { student.gpa }</li>)   
+                    students.map( student => <li key={ student.id }>Name: { student.lastName }, { student.firstName } - Email: { student.email } - GPA: { student.gpa } - School: { student.school && student.school.name } </li>)   
                 }
             </ul>
 

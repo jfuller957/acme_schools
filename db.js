@@ -26,6 +26,7 @@ const Student = conn.define('student', {
         type: Sequelize.DECIMAL,
         allowNull: false
     }
+
 });
 
 const School = conn.define('school', {
@@ -61,7 +62,7 @@ const syncAndSeed = async()=> {
             Student.create({ firstName: 'Moe', lastName: 'Alpha', email: 'moe.alpha@grumble.com', gpa: '4.0', schoolId: calpolySchool.id }),
             Student.create({ firstName: 'Larry', lastName: 'Bravo', email: 'larry.bravo@bumble.com', gpa: '2.0', schoolId: calpolySchool.id }),
             Student.create({ firstName: 'Curly', lastName: 'Charlie', email: 'curly.charlie@tumble.com', gpa: '2.0', schoolId: ucsdSchool.id }),
-            Student.create({ firstName: 'Shep', lastName: 'Delta', email: 'shep.delta@mumble.com', gpa: '3.0', schoolId: calpolySchool.id })
+            Student.create({ firstName: 'Shep', lastName: 'Delta', email: 'shep.delta@mumble.com', gpa: '3.0' })
         ]);
 
     const students = await Student.findAll();

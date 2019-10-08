@@ -11,7 +11,7 @@ db.syncAndSeed()
 
 app.get('/api/students', async(req, res, next)=> {
     try {
-        res.send( await db.models.Student.findAll({ include: [db.models.School]}));
+        res.send( await db.models.Student.findAll({ include: [db.models.School] }));
     }
     catch(ex){
         next(ex);
@@ -33,7 +33,7 @@ app.post('/api/students', async(req, res, next)=> {
 
 app.get('/api/schools', async(req, res, next)=> {
     try {
-        res.send( await db.models.School.findAll());
+        res.send( await db.models.School.findAll({ include: [db.models.Student] }));
     }
     catch(ex){
         next(ex);
