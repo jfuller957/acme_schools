@@ -30,15 +30,6 @@ app.post('/api/students', async(req, res, next)=> {
     }
 });
 
-// app.put('/api/students/:id', async(req, res, next)=> {
-//     try{
-//         res.send( await db.models.Student.update(req.body))
-//     }
-//     catch(ex){
-//         next(ex);
-//     }
-// });
-
 app.delete('/api/students', async(req, res, next)=> {
     try{
         await db.models.Student.destroy({where: {id: req.body.id}})

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addNewStudent, destroyStudent, fetchSchools } from './store';
+import { addNewStudent, destroyStudent } from './store';
 
 
 class _Students extends React.Component{

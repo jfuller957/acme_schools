@@ -27,14 +27,6 @@ class _Schools extends React.Component{
 
 const mapStateToProps = ({ schools })=> ({ schools });
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         addSchool: (school)=> {
-//             dispatch(addNewSchool(school));
-//         }
-//     };
-// };
-
 const Schools = connect(mapStateToProps)(_Schools);
 
 export default Schools;
