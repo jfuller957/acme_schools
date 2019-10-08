@@ -17,7 +17,6 @@ class App extends React.Component{
     async componentDidMount(){
         fetchStudents();
         fetchSchools();
-        // addNewStudent();
     }
     render(){
         return(
@@ -26,7 +25,7 @@ class App extends React.Component{
                     <Route component={ Nav } />
                     <Route path='/' component={ Home } exact />
                     <Route path='/students' component={ Students } />
-                    <Route path='/schools' component={ Schools } />                
+                    <Route path='/schools' component={ Schools } />
                 </HashRouter>
             </Provider>
         );

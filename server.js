@@ -4,14 +4,14 @@ const db = require('./db');
 const path = require('path');
 const babel = require('@babel/core');
 const fs = require('fs');
-const port = 3001;
+const port = 3003;
 
 db.syncAndSeed()
     .then(()=> app.listen(port, ()=> console.log(`Listening on port ${port}`)));
 
 app.get('/api/students', async(req, res, next)=> {
     try {
-        res.send( await db.models.Student.findAll());
+        res.send( await db.models.Student.findAll({ include: [db.models.School]}));
     }
     catch(ex){
         next(ex);

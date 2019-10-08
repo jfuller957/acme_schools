@@ -20,13 +20,13 @@ class _Students extends React.Component{
         <div>
             Students -  there are { students.length } students.
             <form>
-                <input name="firstName" value={ students.firstName } onChange=
+                <input name="firstName" placeholder="First Name" value={ students.firstName } onChange=
                     {(ev) => this.setState({ firstName: ev.target.value })} />
-                <input name="lastName" value={ students.lastName } onChange=
+                <input name="lastName" placeholder="Last Name" value={ students.lastName } onChange=
                     {(ev) => this.setState({ lastName: ev.target.value })} />
-                <input name="email" value={ students.email } onChange=
+                <input name="email" placeholder="Email Address" value={ students.email } onChange=
                     {(ev) => this.setState({ email: ev.target.value })} />
-                <input name="gpa" value={ students.gpa } onChange=
+                <input name="gpa" placeholder="GPA" value={ students.gpa } onChange=
                     {(ev) => this.setState({ gpa: ev.target.value })} />
                 <button onClick={ ()=> this.props.addStudent(this.state) }>Add Student</button>
             </form>
