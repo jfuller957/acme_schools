@@ -9,6 +9,9 @@ const port = 3003;
 db.syncAndSeed()
     .then(()=> app.listen(port, ()=> console.log(`Listening on port ${port}`)));
 
+// parse incoming requests to add
+app.use(express.json());
+
 app.get('/api/students', async(req, res, next)=> {
     try {
         res.send( await db.models.Student.findAll({ include: [db.models.School] }));
@@ -18,10 +21,6 @@ app.get('/api/students', async(req, res, next)=> {
     }
 });
 
-
-// parse incoming requests to add
-app.use(express.json());
-
 app.post('/api/students', async(req, res, next)=> {
     try {
         res.send( await db.models.Student.create(req.body));
@@ -30,6 +29,26 @@ app.post('/api/students', async(req, res, next)=> {
         next(ex);
     }
 });
+
+// app.put('/api/students/:id', async(req, res, next)=> {
+//     try{
+//         res.send( await db.models.Student.update(req.body))
+//     }
+//     catch(ex){
+//         next(ex);
+//     }
+// });
+
+app.delete('/api/students/:id', async(req, res, next)=> {
+    try{
+        const studentId = req.params.id;
+        
+    }
+    catch(ex){
+        next(ex);
+    }
+});
+
 
 app.get('/api/schools', async(req, res, next)=> {
     try {

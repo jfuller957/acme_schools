@@ -3,6 +3,7 @@ import axios from 'axios';
 import thunk from 'redux-thunk';
 
 const ADD_STUDENT = 'ADD_STUDENT';
+const DELETE_STUDENT = 'DELETE_STUDENT';
 const SET_STUDENTS = 'SET_STUDENTS';
 
 const ADD_SCHOOL = 'ADD_SCHOOL';
@@ -12,6 +13,9 @@ const reducer = combineReducers({
     students: ( state = [], action)=> {
         let newState = [...state]; 
         if(action.type === ADD_STUDENT){          
+            return [...state, action.student];
+        }
+        else if(action.type === DELETE_STUDENT){          
             return [...state, action.student];
         }
         else if(action.type === SET_STUDENTS){
@@ -46,6 +50,17 @@ const addNewStudent = (newStudent)=> {
     }
 };
 
+const deleteStudent = (student) => {
+    return { type: DELETE_STUDENT, student };
+};
+
+const destroyStudent = (destroyedStudent) => {
+    return async(dispatch)=> {
+        const student = (await axios.delete('/api/students/:id', destroyedStudent)).data;
+        dispatch(deleteStudent(student));
+    }
+} 
+
 const addSchool = (school) => {
     return { type: ADD_SCHOOL, school };
 };
@@ -69,4 +84,4 @@ const fetchSchools = async()=> {
 
 export default store;
 
-export { fetchStudents, fetchSchools, addNewStudent, addNewSchool };
+export { fetchStudents, fetchSchools, addNewStudent, destroyStudent, addNewSchool };

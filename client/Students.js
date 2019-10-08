@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addNewStudent } from './store';
+import { addNewStudent, destroyStudent } from './store';
 
 
 class _Students extends React.Component{
@@ -33,7 +33,20 @@ class _Students extends React.Component{
             </form>
             <ul>
                 {
-                    students.map( student => <li key={ student.id }>Name: { student.lastName }, { student.firstName } - Email: { student.email } - GPA: { student.gpa } - School: { student.school && student.school.name } </li>)   
+                    students.map( student => 
+                        <li key={ student.id }>
+                            Name:  { student.lastName }, { student.firstName } 
+                            - Email: { student.email } 
+                            - GPA: { student.gpa } 
+                            - School: { student.school && student.school.name } 
+                        {/* <select>
+                            {
+                                Schools.map( school => <option key={ school.id }>{ school }</option>)
+                            }
+                        </select> */}
+
+                            <button onClick={ ()=> this.props.deleteStudent(this.state) }>Delete Student</button>
+                        </li>)   
                 }
             </ul>
 
@@ -48,6 +61,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addStudent: (student)=> {
             dispatch(addNewStudent(student));
+        },
+        deleteStudent: (student)=> {
+            dispatch(destroyStudent(student));
         }
     };
 };

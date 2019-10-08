@@ -6,7 +6,9 @@ const _Home = ({ students, schools })=> <div>
     Home -  there are { students.length } students and { schools.length } schools.
 
     Our most popular school is XXXXXX with XXXXXX students.<br /><br />
-    Our top performing school is XXXXX with and average GPA of ###.
+    Our top performing school is XXXXX with and average GPA of ###.<br /><br />
+
+    
 
 </div>
 ;

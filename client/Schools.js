@@ -17,11 +17,10 @@ class _Schools extends React.Component{
                 The following school types are available to attend in California: 
                 <form>
                     <input name='name' value={ schools.name } onChange={(ev) => this.setState({ name: ev.target.value })} />
-                    <button onClick={ ()=> this.props.addSchool(this.state) }>Add School</button>
                 </form>
                 <ul>
                     {
-                        schools.map( school => <li key={ school.id }>{ school.name }</li>)   
+                        schools.map( school => <li key={ school.id }>{ school.name } ({ school.students.length })</li>)   
                     }
                 </ul>
             </div>

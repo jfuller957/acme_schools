@@ -26,6 +26,7 @@ class App extends React.Component{
                     <Route path='/' component={ Home } exact />
                     <Route path='/students' component={ Students } />
                     <Route path='/schools' component={ Schools } />
+                    <Route path='/schools/:id' component={ Schools } />
                 </HashRouter>
             </Provider>
         );
