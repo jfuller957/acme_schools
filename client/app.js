@@ -10,26 +10,24 @@ import Home from './Home';
 import School from './School';
 import Form from './Form';
 
-import store, { fetchStudents, fetchSchools } from './store';
+import store, { fetchStudents, fetchSchools, fetchSchool } from './store';
 
 class App extends React.Component{
-    async componentDidMount(){
+    async componentDidMount () {
         fetchStudents();
         fetchSchools();
     }
-    render(){
+
+    render () {
         return(
             <Provider store={ store }>
                 <HashRouter>
                     <Route component={ Nav } />
                     <Route component={ Form } />
                     <Route path='/' component={ Home } exact />
-                    {/* <Route path='/' component={ Home } exact /> */}
                     <Route path='/students' component={ Students } />
-                    <Route path='/schools' component={ Schools } />
-                    <Route path='/school/' component={ School } />
+                    <Route path='/schools' component={ Schools } exact />
                     <Route path='/schools/:id' component={ School } />
-                    {/* <Route path='/school/popular' component={ School } /> */}
                 </HashRouter>
             </Provider>
         );

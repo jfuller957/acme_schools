@@ -13,7 +13,7 @@ db.syncAndSeed()
 // parse incoming requests to add
 app.use(express.json());
 
-app.get('/api/students', async(req, res, next)=> {
+app.get('/api/students', async(req, res, next) => {
     try {
         res.send(await Student.findAll({ include: [School] }));
     }
@@ -26,8 +26,7 @@ app.put('/api/students', async (req, res, next) => {
     try {
         const changed = await Student.update(req.body, { where: { id: req.body.id }, returning: true });
         res.send(await Student.findAll({ include: [School] }));
-        // console.log(changed[1]);
-        // res.send(changed[1]);
+        
     }
     catch (ex) {
         next(ex);
@@ -73,28 +72,29 @@ app.post('/api/schools', async(req, res, next)=> {
     }
 });
     
-app.get('/api/school/', async(req, res, next) => {
+app.get('/api/schools/:id', async(req, res, next) => {
     try {
-        res.send( await School.findAll({ where: { id:  req.query.school}}))
+        res.send( await School.findOne({ include: [Student], where: { id:  req.params.id}}))
     }
     catch(ex) {
         next(ex);
     }
 });
 
-app.get('/api/school/', async(req, res, next) => {
-    try {
-        res.send( await School.findAll({ where: { 
-            attributes: [sequelize.fn('COUNT', 'Student.id'), 'School.name'],
-            include: [School],
-            group: [sequelize.col('Student.schoolId')],
-            order: [[sequelize.fn('COUNT', 'Student.id'), 'DESC']],
-            limit: 1}}))
-    }
-    catch(ex) {
-        next(ex);
-    }
-});
+// app.get('/api/school/popular', async(req, res, next) => {
+//     try {
+//         res.send( await School.findAll({ where: { 
+//             attributes: [sequelize.fn('COUNT', 'Student.id'), 'School.name'],
+//             include: [School],
+//             group: [sequelize.col('Student.schoolId')],
+//             order: [[sequelize.fn('COUNT', 'Student.id'), 'DESC']],
+//             limit: 1
+//         }}))
+//     }
+//     catch(ex) {
+//         next(ex);
+//     }
+// });
 // Student.findAll({
 //     attributes: [sequelize.fn('COUNT', 'Student.id'), 'School.name'],
 //     include: [School]

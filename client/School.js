@@ -3,37 +3,44 @@ import { connect } from 'react-redux';
 import { fetchSchool } from './store';
 
 class _School extends React.Component{
-    constructor(){
-        super();
-        console.log('loaded');
-    }
+    // constructor(){
+    //     super();
+    // }
+    // async componentDidMount(){
+    //     fetchSchool(this.props.match.params.id);
+    // }
 
+    render () {
+        const { school } = this.props || {};
+        console.log('School page.');
 
-    componentDidMount(){
-        this.props.fetchSchool(this.props.location.search.split('=')[1])
-    }
+        /**
+         * - Students drop down (added by selecting name)
+         * - School Name
+         * - Students in School
+         */
 
-    render(){
-        const {school} = this.props || {};
+        console.log(this.props, '<<');
 
-        return(
+        return (
             <div>
-                {console.log(school)}
-                <p></p>
-                <img />
+                <p>Hey! { school.name } has XXX students.</p>
+                <div><img src={school.image} /></div>
             </div>
         )
     }
 }
 
-const mapStateToProps = (({school}) => ({school})); 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        fetchSchool: (school) => {
-            dispatch(fetchSchool(school));
-        }
-    };
-};
-const School = connect(mapStateToProps, mapDispatchToProps)(_School);
+const mapStateToProps = (({ school }) => ({ school })); 
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         updateSchool: (school) => {
+//             dispatch(updateSchool(school));
+//         }
+//     };
+// };
+
+const School = connect(mapStateToProps)(_School);
 
 export default School;

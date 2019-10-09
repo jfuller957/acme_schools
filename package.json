@@ -6,7 +6,7 @@
   "scripts": {
     "test:dev": "mocha spec.js --watch",
     "webpack": "webpack --watch --mode=development",
-    "start:dev": "nodemon server.js --ignore assets/ --ignore client/ & npm run webpack",
+    "start:dev": "nodemon --ignore assets/ --ignore client/ --exec \"node server.js & npm run webpack\"",
     "postinstall": "webpack"
   }, 
   "dependencies": {

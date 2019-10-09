@@ -18,7 +18,7 @@ class _Students extends React.Component{
         const { students, schools } = this.props || {};
 
         return (
-            <div id="content">
+            <div className="content">
                 <p>Students -  there are { students.length } students.</p>
 
                 <div className="cards">
