@@ -4,6 +4,7 @@ const db = require('./db');
 const path = require('path');
 const babel = require('@babel/core');
 const fs = require('fs');
+const { Student, School } = db.models;
 const port = 3003;
 
 db.syncAndSeed()
@@ -14,16 +15,28 @@ app.use(express.json());
 
 app.get('/api/students', async(req, res, next)=> {
     try {
-        res.send( await db.models.Student.findAll({ include: [db.models.School] }));
+        res.send(await Student.findAll({ include: [School] }));
     }
     catch(ex){
         next(ex);
     }
 });
 
+app.put('/api/students', async (req, res, next) => {
+    try {
+        const changed = await Student.update(req.body, { where: { id: req.body.id }, returning: true });
+        res.send(await Student.findAll({ include: [School] }));
+        // console.log(changed[1]);
+        // res.send(changed[1]);
+    }
+    catch (ex) {
+        next(ex);
+    }
+});
+
 app.post('/api/students', async(req, res, next)=> {
     try {
-        res.send( await db.models.Student.create(req.body));
+        res.send( await Student.create(req.body));
     }
     catch(ex){
         next(ex);
@@ -32,7 +45,7 @@ app.post('/api/students', async(req, res, next)=> {
 
 app.delete('/api/students', async(req, res, next)=> {
     try{
-        await db.models.Student.destroy({where: {id: req.body.id}})
+        await Student.destroy({where: {id: req.body.id}})
         .then(res.sendStatus(204));
     }
     catch(ex){
@@ -43,7 +56,7 @@ app.delete('/api/students', async(req, res, next)=> {
 
 app.get('/api/schools', async(req, res, next)=> {
     try {
-        res.send( await db.models.School.findAll({ include: [db.models.Student] }));
+        res.send( await School.findAll({ include: [Student] }));
     }
     catch(ex){
         next(ex);
@@ -52,7 +65,7 @@ app.get('/api/schools', async(req, res, next)=> {
 
 app.post('/api/schools', async(req, res, next)=> {
     try {
-        res.send( await db.models.School.create(req.body));
+        res.send( await School.create(req.body));
     }
     catch(ex){
         next(ex);

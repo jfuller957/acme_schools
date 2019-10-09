@@ -26,7 +26,6 @@ const Student = conn.define('student', {
         type: Sequelize.DECIMAL,
         allowNull: false
     }
-
 });
 
 const School = conn.define('school', {
@@ -39,6 +38,11 @@ const School = conn.define('school', {
     name: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    image: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: ""
     }
 });
 
@@ -49,10 +53,10 @@ const syncAndSeed = async()=> {
     await conn.sync({ force: true });
         const [ucsdSchool, csusmSchool, calpolySchool, palomarSchool] = await
             Promise.all([
-                School.create({ name: 'UCSD'}),
-                School.create({ name: 'CSUSM'}),
-                School.create({ name: 'Cal-Poly'}),
-                School.create({ name: 'Palomar'})
+                School.create({ name: 'UCSD', image: "https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fdynamcdiversitymag.com%2Fwp-content%2Fuploads%2F2016%2F05%2Fucsd-logo-291x300.png&f=1&nofb=1" }),
+                School.create({ name: 'CSUSM', image: "https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fen%2Fthumb%2F7%2F74%2FCSU_San_Marcos_Cougars_logo.svg%2F1200px-CSU_San_Marcos_Cougars_logo.svg.png&f=1&nofb=1" }),
+                School.create({ name: 'Cal-Poly', image: "https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.studyarchitecture.com%2Fwp-content%2Fuploads%2F13_CaliforniaStatePolytechnicUniversityPomona_icon_color.png&f=1&nofb=1" }),
+                School.create({ name: 'Palomar', image: "https://proxy.duckduckgo.com/iu/?u=http%3A%2F%2Fwww2.palomar.edu%2Fusers%2Fdhokett%2Fimages%2Fmidlevel01.gif&f=1&nofb=1" })
             ]);
 
     

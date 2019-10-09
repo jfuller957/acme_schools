@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-
 class _Schools extends React.Component{
     constructor(){
         super();
@@ -9,15 +8,21 @@ class _Schools extends React.Component{
             name: ''
         }
     }
+
     render(){
-        const { schools } = this.props || [];
+        const { schools } = this.props || {};
 
         return (
             <div>
                 The following school types are available to attend in California: 
                 <ul>
                     {
-                        schools.map( school => <li key={ school.id }>{ school.name } ({ school.students.length })</li>)   
+                        schools.map(school => (
+                            <li key={ school.id }>
+                                <div><img src={school.image} /></div>
+                                <div>{ school.name } ({ school.students.length })</div>
+                            </li>
+                        ))
                     }
                 </ul>
             </div>
@@ -25,7 +30,7 @@ class _Schools extends React.Component{
     }
 };
 
-const mapStateToProps = ({ schools })=> ({ schools });
+const mapStateToProps = ({ schools }) => ({ schools });
 
 const Schools = connect(mapStateToProps)(_Schools);
 

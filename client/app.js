@@ -14,6 +14,9 @@ class App extends React.Component{
     async componentDidMount(){
         fetchStudents();
         fetchSchools();
+        const id = this.props.match.params.id;
+        const { data } = await axios.get(`/api/schools/${id}`)
+            this.setState({ student: data })
     }
     render(){
         return(
@@ -22,7 +25,6 @@ class App extends React.Component{
                     <Route component={ Nav } />
                     <Route path='/' component={ Home } exact />
                     <Route path='/students' component={ Students } />
-                    <Route path='/students/:id' component={ Students } />
                     <Route path='/schools' component={ Schools } />
                     <Route path='/schools/:id' component={ Schools } />
                 </HashRouter>

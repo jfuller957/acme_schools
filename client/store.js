@@ -2,11 +2,16 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import axios from 'axios';
 import thunk from 'redux-thunk';
 
+// Actions
+
 const ADD_STUDENT = 'ADD_STUDENT';
 const DELETE_STUDENT = 'DELETE_STUDENT';
+const UPDATE_STUDENTS = 'UPDATE_STUDENTS';
 const SET_STUDENTS = 'SET_STUDENTS';
 
 const SET_SCHOOLS = 'SET_SCHOOLS';
+
+// Reducer
 
 const reducer = combineReducers({
     students: ( state = [], action)=> {
@@ -18,16 +23,14 @@ const reducer = combineReducers({
 
         else if(action.type === DELETE_STUDENT){
 
-            // student = each individual piece of state (it's treated like an array here)
-
-            // action.student = student uuid
-            // student.id = a piece of state(student) we are pulling id out of
-
-            // newState.filter is looping over each piece(student) of state and we remove student deleted by id(action.student)
             return newState.filter(student => action.student !== student.id);
         }
 
         else if(action.type === SET_STUDENTS){
+            return action.students;
+        }
+
+        else if(action.type === UPDATE_STUDENTS){
             return action.students;
         }
         
@@ -51,7 +54,7 @@ const addStudent = (student) => {
 };
 
 const addNewStudent = (newStudent)=> {
-    return async(dispatch)=> {
+    return async (dispatch) => {
         const student = (await axios.post('/api/students', newStudent)).data;
         dispatch(addStudent(student));
     }
@@ -62,22 +65,31 @@ const deleteStudent = (student) => {
 };
 
 const destroyStudent = (studentId) => {
-    return async(dispatch)=> {
+    return async (dispatch) => {
         const student = (await axios.delete('/api/students/', {data : { id : studentId}})).data;
         dispatch(deleteStudent(studentId));
     }
-} 
+}; 
 
-const fetchStudents = async()=> {
-    store.dispatch({ type: SET_STUDENTS, students: (await axios.get('/api/students')).data});
+const changeStudent = (students) => {
+    return { type: UPDATE_STUDENTS, students };
 };
 
-const fetchSchools = async()=> {
+const updateStudent = (changedStudent)=> {
+    return async (dispatch) => {
+        const student = (await axios.put('/api/students', changedStudent)).data;
+        dispatch(changeStudent(student));
+    }
+};
+
+const fetchStudents = async () => {
+    store.dispatch({ type: SET_STUDENTS, students: (await axios.get('/api/students')).data });
+};
+
+const fetchSchools = async () => {
     store.dispatch({ type: SET_SCHOOLS, schools: (await axios.get('/api/schools')).data});
 };
 
-
+export { fetchStudents, fetchSchools, addNewStudent, destroyStudent, updateStudent };
 
 export default store;
-
-export { fetchStudents, fetchSchools, addNewStudent, destroyStudent};
