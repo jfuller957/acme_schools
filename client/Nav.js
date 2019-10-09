@@ -8,7 +8,7 @@ const _Nav = ({ studentCount, schoolCount, popSchool, topSchool, location})=> {
             <Link id="lefty" to='/'>Acme Schools</Link>
             <Link to='/students'>Students ({ studentCount })</Link>
             <Link to='/schools'>Schools ({ schoolCount })</Link>
-            <Link to='/schools'>Most Popular School ({ popSchool })({ studentCount })</Link>
+            <Link to='/school/popular'>Most Popular School ({ popSchool })({ studentCount })</Link>
             <Link to='/schools'>Top School ({ topSchool })</Link>
         </nav>
     );
@@ -21,6 +21,8 @@ const Nav = connect(({ students, schools, location }) => {
         schoolCount: schools.length,
         popSchool: 'UCSD',
         topSchool: 'Cal-Poly'
+
+        // Project.max('count').then(max => {})
     }
 })(_Nav); 
 

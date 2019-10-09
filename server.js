@@ -82,6 +82,27 @@ app.get('/api/school/', async(req, res, next) => {
     }
 });
 
+app.get('/api/school/', async(req, res, next) => {
+    try {
+        res.send( await School.findAll({ where: { 
+            attributes: [sequelize.fn('COUNT', 'Student.id'), 'School.name'],
+            include: [School],
+            group: [sequelize.col('Student.schoolId')],
+            order: [[sequelize.fn('COUNT', 'Student.id'), 'DESC']],
+            limit: 1}}))
+    }
+    catch(ex) {
+        next(ex);
+    }
+});
+// Student.findAll({
+//     attributes: [sequelize.fn('COUNT', 'Student.id'), 'School.name'],
+//     include: [School]
+//     group: [sequelize.col('Student.schoolId')]
+//     order: [[sequelize.fn('COUNT', 'Student.id'), 'DESC']]
+//     limit: 1    
+//   }
+
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get('/', (req, res, next)=> res.sendFile(path.join(__dirname, 'index.html')));

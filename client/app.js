@@ -24,9 +24,12 @@ class App extends React.Component{
                     <Route component={ Nav } />
                     <Route component={ Form } />
                     <Route path='/' component={ Home } exact />
+                    {/* <Route path='/' component={ Home } exact /> */}
                     <Route path='/students' component={ Students } />
                     <Route path='/schools' component={ Schools } />
                     <Route path='/school/' component={ School } />
+                    <Route path='/schools/:id' component={ School } />
+                    {/* <Route path='/school/popular' component={ School } /> */}
                 </HashRouter>
             </Provider>
         );
