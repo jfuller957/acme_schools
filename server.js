@@ -63,6 +63,7 @@ app.get('/api/schools', async(req, res, next)=> {
     }
 });
 
+
 app.post('/api/schools', async(req, res, next)=> {
     try {
         res.send( await School.create(req.body));
@@ -72,6 +73,14 @@ app.post('/api/schools', async(req, res, next)=> {
     }
 });
     
+app.get('/api/school/', async(req, res, next) => {
+    try {
+        res.send( await School.findAll({ where: { id:  req.query.school}}))
+    }
+    catch(ex) {
+        next(ex);
+    }
+});
 
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 

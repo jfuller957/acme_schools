@@ -41,9 +41,8 @@ const School = conn.define('school', {
     },
     image: {
         type: Sequelize.STRING,
-        allowNull: false,
-        defaultValue: ""
-    }
+        allowNull: true
+    }, 
 });
 
 Student.belongsTo(School);

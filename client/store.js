@@ -8,7 +8,7 @@ const ADD_STUDENT = 'ADD_STUDENT';
 const DELETE_STUDENT = 'DELETE_STUDENT';
 const UPDATE_STUDENTS = 'UPDATE_STUDENTS';
 const SET_STUDENTS = 'SET_STUDENTS';
-
+const GET_SCHOOL = 'GET_SCHOOL';
 const SET_SCHOOLS = 'SET_SCHOOLS';
 
 // Reducer
@@ -90,6 +90,10 @@ const fetchSchools = async () => {
     store.dispatch({ type: SET_SCHOOLS, schools: (await axios.get('/api/schools')).data});
 };
 
-export { fetchStudents, fetchSchools, addNewStudent, destroyStudent, updateStudent };
+const fetchSchool = async (school) => {
+    store.dispatch({ type: GET_SCHOOL, school: (await axios.get(`/api/school/?school=${school}`)).data });
+}
+
+export { fetchStudents, fetchSchools, addNewStudent, destroyStudent, updateStudent, fetchSchool };
 
 export default store;

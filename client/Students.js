@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addNewStudent, destroyStudent, updateStudent } from './store';
+import { destroyStudent, updateStudent } from './store';
 
 
 class _Students extends React.Component{
@@ -20,32 +20,6 @@ class _Students extends React.Component{
         return (
             <div id="content">
                 <p>Students -  there are { students.length } students.</p>
-                    <form>
-                        <label>First Name</label>
-                        <input name="firstName" placeholder="James" value={ students.firstName } onChange=
-                            {(ev) => this.setState({ firstName: ev.target.value })} />
-                        
-                        <label>Last Name</label>
-                        <input name="lastName" placeholder="Fuller" value={ students.lastName } onChange=
-                            {(ev) => this.setState({ lastName: ev.target.value })} />
-                        
-                        <label>Email Address</label>
-                        <input name="email" placeholder="jfuller957@gmail.com" value={ students.email } onChange=
-                            {(ev) => this.setState({ email: ev.target.value })} />
-
-                        <label>GPA</label>
-                        <input name="gpa" placeholder="4.0" value={ students.gpa } onChange=
-                            {(ev) => this.setState({ gpa: ev.target.value })} />
-
-                        <label>Choose a School</label>
-                        <select onChange={ev => this.setState({ schoolId: ev.target.value })}>
-                            {
-                                schools.map(school => (<option key={ school.id } value={ school.id }>{ school.name }</option>))
-                            }
-                        </select>
-
-                        <button onClick={() => this.props.addStudent(this.state)}>Add Student</button>
-                    </form>
 
                 <div className="cards">
                     {

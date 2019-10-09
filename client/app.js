@@ -1,32 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider, connect } from  'react-redux';
-import { HashRouter, Route, Link } from 'react-router-dom';
+import { Provider } from  'react-redux';
+import { HashRouter, Route } from 'react-router-dom';
 
 import Students from './Students';
 import Nav from './Nav';
 import Schools from './Schools';
 import Home from './Home';
+import School from './School';
+import Form from './Form';
 
-import store, { fetchStudents, fetchSchools, addNewStudent } from './store';
+import store, { fetchStudents, fetchSchools } from './store';
 
 class App extends React.Component{
     async componentDidMount(){
         fetchStudents();
         fetchSchools();
-        const id = this.props.match.params.id;
-        const { data } = await axios.get(`/api/schools/${id}`)
-            this.setState({ student: data })
     }
     render(){
         return(
             <Provider store={ store }>
                 <HashRouter>
                     <Route component={ Nav } />
+                    <Route component={ Form } />
                     <Route path='/' component={ Home } exact />
                     <Route path='/students' component={ Students } />
                     <Route path='/schools' component={ Schools } />
-                    <Route path='/schools/:id' component={ Schools } />
+                    <Route path='/school/' component={ School } />
                 </HashRouter>
             </Provider>
         );

@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 class _Schools extends React.Component{
     constructor(){
@@ -20,7 +21,9 @@ class _Schools extends React.Component{
                         schools.map(school => (
                             <li key={ school.id }>
                                 <div><img src={school.image} /></div>
-                                <div>{ school.name } ({ school.students.length })</div>
+                                <div> 
+                                    <Link to={`/school/?school=${school.id}`} >{ school.name } </Link> ({ school.students.length })
+                                </div>
                             </li>
                         ))
                     }
