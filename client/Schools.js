@@ -11,21 +11,10 @@ class _Schools extends React.Component{
     }
 
     render(){
-        const { schools, students } = this.props || {};
+        const { schools } = this.props || {};
 
         return (
             <div className="content">
-                {/* <select onChange={(evt) => {
-                    const updatedSchools = {
-                        ...schools,
-                        studentId: evt.target.value
-                    };
-                        this.props.updateSchool(updatedSchools); 
-                    }}>
-                    {
-                        students.map( student => (<option key={ student.id } value={ student.id }>{ student.name }</option>))
-                    }
-                </select> */}
                 <div className="cards">
                     {
                         schools.map(school => (

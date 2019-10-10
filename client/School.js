@@ -48,18 +48,6 @@ class _School extends React.Component {
                                     <img src={ school.image } />
                                 </div>
 
-                                {/* <select onChange={(evt) => {
-                                    const updatedStudent = {
-                                        ...student,
-                                        schoolId: evt.target.value
-                                    };
-
-                                    this.props.updateStudent(updatedStudent); 
-                                }}>
-                                    {
-                                        schools.map( school => (<option key={ school.id } value={ school.id }>{ school.name }</option>))
-                                    }
-                                </select> */}
                                 <button className="delete" onClick={() => this.props.deleteStudentFromSchool(student)}>Delete Student</button>
                             </div>
                         ))
@@ -70,13 +58,10 @@ class _School extends React.Component {
     }
 }
 
-// const mapStateToProps = (({ school }) => ({ school })); 
+const mapStateToProps = (({ schools, students }) => ({ schools, students })); 
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // updateSchool: (school) => {
-        //     dispatch(updateSchool(school));
-        // },
         addStudentToSchool: (student, schoolId) => {
             const updatedStudent = {
                 ...student,
@@ -96,13 +81,6 @@ const mapDispatchToProps = (dispatch) => {
             console.log('updatedStudent', updatedStudent)
             dispatch(updateStudent(updatedStudent));
         }
-    };
-};
-
-const mapStateToProps = state => {
-    return {
-        schools: state.schools,
-        students: state.students
     };
 };
 
